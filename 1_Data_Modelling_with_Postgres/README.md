@@ -88,7 +88,10 @@ weekday       **ENUM(Mon, Tue, Wed, Thu, Fri, Sat, Sun)**
 --TODO--\
 -explain the choices for the datatypes in short\
 -add the primary keys
-
+-fix types in README file
+-scan README file for errors (ie extra 'new line')
+-possible errors and mitigation (test files)
+-Summary for the whole project
 ### ETL Pipeline - TODO
 
 
@@ -96,6 +99,8 @@ weekday       **ENUM(Mon, Tue, Wed, Thu, Fri, Sat, Sun)**
 Python\
 Jupyter Notebook\
 Postgres\
+Psycopg2\
+Pandas
 
 
 

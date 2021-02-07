@@ -9,18 +9,15 @@ time_table_drop = "DROP TABLE IF EXISTS time"
 # DROP ENUMS
 
 level_type_enum_drop = "DROP TYPE IF EXISTS level_type"
-gender_type_enum_drop = "DROP TYPE IF EXISTS gender_type"
-weekday_type_enum_drop = "DROP TYPE IF EXISTS weekday_type"
 
 # CREATE ENUMS
 
 level_type_enum_create = ("CREATE TYPE level_type AS ENUM ('free', 'paid')")
-gender_type_enum_create = ("CREATE TYPE gender_type AS ENUM ('F', 'M', 'Other', 'NA')")
-weekday_type_enum_create = ("CREATE TYPE weekday_type AS ENUM ('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun')")
 
 # CREATE TABLES
 
-songplay_table_create = ("""CREATE TABLE IF NOT EXISTS songplays (
+songplay_table_create = ("""
+                        CREATE TABLE IF NOT EXISTS songplays (
                                 songplay_id SERIAL PRIMARY KEY,
                                 start_time int NOT NULL,
                                 user_id int NOT NULL,
@@ -29,13 +26,14 @@ songplay_table_create = ("""CREATE TABLE IF NOT EXISTS songplays (
                                 artist_id varchar,
                                 session_id int,
                                 location int,
-                                user_agent varchar)""")
+                                user_agent varchar)
+                                """)
 
 user_table_create = ("""CREATE TABLE IF NOT EXISTS users(
-                            user_id int NOT NULL,
+                            user_id varchar,
                             first_name varchar,
                             last_name varchar,
-                            gender gender_type,
+                            gender varchar,
                             level level_type)""")
 
 song_table_create = ("""CREATE TABLE IF NOT EXISTS songs(
@@ -53,40 +51,45 @@ artist_table_create = ("""CREATE TABLE IF NOT EXISTS artists(
                             longitude numeric)""")
     
 time_table_create = ("""CREATE TABLE IF NOT EXISTS time(
-                            start_time int,
+                            start_time SERIAL PRIMARY KEY,
                             hour int,
                             day int,
                             week int, 
                             month int, 
                             year int, 
-                            weekday weekday_type)""")
+                            weekday int)""")
 
 # INSERT RECORDS
 
-songplay_table_insert = ("""
-""")
+songplay_table_insert = ("""INSERT INTO songplays(start_time, user_id, level, song_id, artist_id,
+                            session_id, location, user_agent)
+                            VALUES(%s, %s, %s, %s, %s, %s, %s, %s);""")
 
-user_table_insert = ("""
-""")
+user_table_insert = ("""INSERT INTO users(user_id, first_name, last_name, gender, level)
+                        VALUES(%s, %s, %s, %s, %s);""")
 
-song_table_insert = ("""
-""")
+song_table_insert = ("""INSERT INTO songs (song_id, title, artist_id, year, duration)
+                        VALUES(%s, %s, %s, %s, %s);""")
 
-artist_table_insert = ("""
-""")
+artist_table_insert = ("""INSERT INTO artists(artist_id, name, location, latitude, longitude)
+                          VALUES(%s, %s, %s, %s, %s);""")
 
 
-time_table_insert = ("""
-""")
+time_table_insert = ("""INSERT INTO time(hour, day, week, month, year, weekday)
+                        VALUES( %s, %s, %s, %s, %s, %s);""")
 
 # FIND SONGS
 
-song_select = ("""
-""")
+song_select = ("""SELECT songs.song_id, artists.artist_id 
+                  FROM (songs INNER JOIN artists
+                  ON songs.artist_id = artists.artist_id)
+                  WHERE songs.title=%s
+                  AND artists.name=%s
+                  AND songs.duration=%s""")
 
 # QUERY LISTS
 
-drop_enum_queries = [level_type_enum_drop, gender_type_enum_drop, weekday_type_enum_drop]
-create_enum_queries = [level_type_enum_create, gender_type_enum_create, weekday_type_enum_create]
+drop_enum_queries = [level_type_enum_drop]
+create_enum_queries = [level_type_enum_create]
 create_table_queries = [songplay_table_create, user_table_create, song_table_create, artist_table_create, time_table_create]
 drop_table_queries = [songplay_table_drop, user_table_drop, song_table_drop, artist_table_drop, time_table_drop]
