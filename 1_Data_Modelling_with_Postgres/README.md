@@ -40,15 +40,15 @@ The database schema will be modelled following a star schema centered around the
 Tables:
 1. songplays (fact table) - records log data associated with streaming actions for a song
 attributes:\
-songplay_id   **int**\
-start_time    **int**\
-user_id       **int**\
-level         **ENUM(free, paid)**\
-song_id       **varchar**\
-artist_id     **varchar**\
-session_id    **int**\
-location      **int**\
-user_agent    **varchar**
+songplay_id   `int`\
+start_time    `int`\
+user_id       `int`\
+level         `ENUM(free, paid)`\
+song_id       `varchar`\
+artist_id     `varchar`\
+session_id    `int`\
+location      `int`\
+user_agent    `varchar`
 
 2. users (dimension table) - contains the users in the app\
 attributes:\
