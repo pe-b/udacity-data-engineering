@@ -19,13 +19,13 @@ level_type_enum_create = ("CREATE TYPE level_type AS ENUM ('free', 'paid')")
 songplay_table_create = ("""
                         CREATE TABLE IF NOT EXISTS songplays (
                                 songplay_id SERIAL PRIMARY KEY,
-                                start_time int NOT NULL,
-                                user_id int NOT NULL,
+                                start_time bigint NOT NULL,
+                                user_id varchar NOT NULL,
                                 level level_type,
                                 song_id varchar,
                                 artist_id varchar,
-                                session_id int,
-                                location int,
+                                session_id bigint,
+                                location varchar,
                                 user_agent varchar)
                                 """)
 

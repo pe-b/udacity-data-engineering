@@ -7,43 +7,52 @@ from sql_queries import *
 
 def process_song_file(cur, filepath):
     # open song file
-    df = 
+    df = pd.read_json(filepath, lines=True)
 
     # insert song record
-    song_data = 
+    song_data = df.head()[['song_id', 'title', 'artist_id', 'year', 'duration']].values[0]
     cur.execute(song_table_insert, song_data)
     
     # insert artist record
-    artist_data = 
+    artist_data = df.head()[['artist_id', 'artist_name', 'artist_location', 'artist_latitude', 'artist_longitude']].values[0]
     cur.execute(artist_table_insert, artist_data)
 
 
 def process_log_file(cur, filepath):
     # open log file
-    df = 
+    df = pd.read_json(filepath, lines=True)
 
     # filter by NextSong action
-    df = 
+    df = df[df['page'] == 'NextSong']
 
     # convert timestamp column to datetime
-    t = 
+    
+    t = df['ts'] = pd.to_datetime(df['ts'], unit='ms')
     
     # insert time data records
-    time_data = 
-    column_labels = 
-    time_df = 
+    
+    #TODO - find why it breaks on the timestamp
+    #TODO - make start_time a pk 
+    time_data = [df['ts'], t.dt.hour, t.dt.day, t.dt.weekofyear, t.dt.month, t.dt.year, t.dt.dayofweek]
+    column_labels = ["start_time", "hour", "day", "week of year", "month", "year", "weekday"]
+    d = {column_labels[0] : time_data[0], column_labels[1] : time_data[1],\
+         column_labels[2] : time_data[2], column_labels[3] : time_data[3],\
+         column_labels[4] : time_data[4], column_labels[5] : time_data[5],\
+         column_labels[6] : time_data[6], column_labels[6] : time_data[6]}
+    time_df = pd.DataFrame(data=d)
 
     for i, row in time_df.iterrows():
         cur.execute(time_table_insert, list(row))
 
     # load user table
-    user_df = 
+    user_df = pd.read_json(filepath, lines=True)[['userId', 'firstName', 'lastName', 'gender', 'level']]
 
     # insert user records
     for i, row in user_df.iterrows():
         cur.execute(user_table_insert, row)
 
     # insert songplay records
+    counter = 0;
     for index, row in df.iterrows():
         
         # get songid and artistid from song and artist tables
@@ -56,7 +65,12 @@ def process_log_file(cur, filepath):
             songid, artistid = None, None
 
         # insert songplay record
-        songplay_data = 
+        extracted = df[['ts','userId', 'level', 'sessionId', 'location', 'userAgent']]
+        songplay_data = [extracted.values[counter][0], extracted.values[counter][1],\
+                         extracted.values[counter][2], songid, artistid,\
+                         extracted.values[counter][3], extracted.values[counter][4],\
+                         extracted.values[counter][5]]
+        counter = counter + 1;
         cur.execute(songplay_table_insert, songplay_data)
 
 
