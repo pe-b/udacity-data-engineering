@@ -21,19 +21,16 @@ def process_song_file(cur, filepath):
 def process_log_file(cur, filepath):
     # open log file
     df = pd.read_json(filepath, lines=True)
-
+    
     # filter by NextSong action
     df = df[df['page'] == 'NextSong']
-
+    
     # convert timestamp column to datetime
-    
     t = df['ts'] = pd.to_datetime(df['ts'], unit='ms')
-    
+        
     # insert time data records
     
-    #TODO - find why it breaks on the timestamp
-    #TODO - make start_time a pk 
-    time_data = [df['ts'], t.dt.hour, t.dt.day, t.dt.weekofyear, t.dt.month, t.dt.year, t.dt.dayofweek]
+    time_data = [t, t.dt.hour, t.dt.day, t.dt.weekofyear, t.dt.month, t.dt.year, t.dt.dayofweek]
     column_labels = ["start_time", "hour", "day", "week of year", "month", "year", "weekday"]
     d = {column_labels[0] : time_data[0], column_labels[1] : time_data[1],\
          column_labels[2] : time_data[2], column_labels[3] : time_data[3],\
@@ -66,13 +63,14 @@ def process_log_file(cur, filepath):
 
         # insert songplay record
         extracted = df[['ts','userId', 'level', 'sessionId', 'location', 'userAgent']]
-        songplay_data = [extracted.values[counter][0], extracted.values[counter][1],\
-                         extracted.values[counter][2], songid, artistid,\
+        print()
+        songplay_data = [extracted.values[counter][0], extracted.values[counter][1], extracted.values[counter][2], songid, artistid,\
                          extracted.values[counter][3], extracted.values[counter][4],\
                          extracted.values[counter][5]]
-        counter = counter + 1;
-        cur.execute(songplay_table_insert, songplay_data)
 
+        counter = counter + 1;
+        
+        cur.execute(songplay_table_insert, songplay_data)
 
 def process_data(cur, conn, filepath, func):
     # get all files matching extension from directory
