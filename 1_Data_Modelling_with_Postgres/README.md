@@ -93,15 +93,11 @@ month         `int`\
 year          `int`\
 weekday       `int`
 
-
---TODO--\
--fix types in README file
--scan README file for errors (ie extra 'new line')
--possible errors and mitigation (test files)
--Summary for the whole project
--check the etl.py for a last refactor
 ### ETL Pipeline - TODO
-
+The etl pipeline is constructed in the steps detailed below:
+1. extract and process the song dataset
+2. extract and process the log dataset
+3. load the new tables with the processed data
 
 ### Stack
 Jupyter Notebook\
@@ -111,5 +107,3 @@ Pandas\
 Postgres
 
 
-
-## Remove - TODO
