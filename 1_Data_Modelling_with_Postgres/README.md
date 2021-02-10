@@ -2,21 +2,25 @@
 
 This represents the first out of the eight projects in the "Data Engineering Nanodegree" provided by Udacity.
 
+## Summary
+The project represents the development of an etl pipeline built to facilitate the analysis of data in a music streaming organisation.
+
+
 ## Motivation - TODO
 Practice and apply to a real-world scenario the concepts covered in the 'Data Modelling with Postgres' chapter such as:\
 -normalisation/ denormalisation\
 -query derivation\
 -star schema implementation\
 -SQL operations\
--Postgres\
+-Postgres
 
 ## Project Details
 ### Introduction
-A music streaming /company/ similar to Spotify has been collecting data on its user's actity while using the music streaming application. The business analytics team intends to gain insight on the frequency with which songs are played.\
-The team requires the engineer to design and develop a database schema and an ETL pipeline optimised around the already collected data and the analysis mentioned above.
+A music streaming organisation similar to Spotify has been collecting data on its user's actity while they were using the streaming application. The business analytics team intends to gain insight on the frequency with which songs are played.\
+The team requires the engineer to design and develop a database schema and an ETL pipeline optimised for the already collected data and the analysis mentioned above.
 
 ### Existing Data - TODO
-The collected data is split in two datasets:\
+The existing data consists of two datasets:\
 
 1. Song Dataset\
 Descritpion: Contains metadata about songs and their artists.\
@@ -36,71 +40,75 @@ File example:\
 
 ## Solution
 ### Schema Design
-The database schema will be modelled following a star schema centered around the 'songplays' table.
+The database schema will be modelled following a star schema centered around the 'songplays' table. The star schema has been chosen as a best fit for the type of queries intended.  
+
 Tables:
 1. songplays (fact table) - records log data associated with streaming actions for a song
 attributes:\
-songplay_id   `int`\
-start_time    `int`\
-user_id       `int`\
+songplay_id   `int` - PK\
+start_time    `timestamp`\
+user_id       `varchar`\
 level         `ENUM(free, paid)`\
 song_id       `varchar`\
 artist_id     `varchar`\
-session_id    `int`\
-location      `int`\
+session_id    `bigint`\
+location      `varchar`\
 user_agent    `varchar`
 
 2. users (dimension table) - contains the users in the app\
+on conflict do nothing - a single row per user provides all the necessary info\
 attributes:\
-user_id       **int**\
-first_name    **varchar**\
-last_name     **varchar**\
-gender        **ENUM(F, M, Other, NA)**\
-level         **ENUM(free, paid)**
+user_id       `varchar` - PK\
+first_name    `varchar`\
+last_name     `varchar`\
+gender        `varchar`\
+level         `ENUM(free, paid)`
 
 3. songs (dimension table) - contains the songs in the music database\
+on conflict do nothing - a single row per song provides all the necessary info\
 attributes:\
-song_id       **varchar**\
-title         **varchar**\
-artist_id     **varchar**\
-year          **int**\
-duration      **numeric**
+song_id       `varchar` - PK\
+title         `varchar`\
+artist_id     `varchar`\
+year          `int`\
+duration      `numeric`
 
-4. artists (dimension table) - artists in the music database
+4. artists (dimension table) - artists in the music database\
+on conflict do nothing - a single row per artist provides all the necessary info\
 attributes: \
-artist_id     **varchar**\
-name          **varchar**\
-location      **varchar**\
-latitude      **numeric**\
-longitude     **numeric**
+artist_id     `varchar` - PK\
+name          `varchar`\
+location      `varchar`\
+latitude      `numeric`\
+longitude     `numeric`
 
-5. time (dimension table) - timestamps of records in 'songplays' into specific units
+5. time (dimension table) - timestamps of records in 'songplays' into specific units\
+on conflict do nothing - since the timestamp is very precise, we assume there shouldn't be multiple entries with the exact same timestamp\
 attributes:\
-start_time    **int**\
-hour          **int**\
-day           **int**\
-week          **int**\
-month         **int**\
-year          **int**\
-weekday       **ENUM(Mon, Tue, Wed, Thu, Fri, Sat, Sun)**
+start_time    `timestamp` - PK\
+hour          `int`\
+day           `int`\
+week          `int`\
+month         `int`\
+year          `int`\
+weekday       `int`
 
 
 --TODO--\
--explain the choices for the datatypes in short\
--add the primary keys
 -fix types in README file
 -scan README file for errors (ie extra 'new line')
 -possible errors and mitigation (test files)
 -Summary for the whole project
+-check the etl.py for a last refactor
 ### ETL Pipeline - TODO
 
 
-### Tools
-Python\
+### Stack
 Jupyter Notebook\
-Postgres\
+Python\
 Psycopg2\
-Pandas
+Pandas\
+Postgres
 
 
 

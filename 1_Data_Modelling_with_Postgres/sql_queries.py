@@ -19,7 +19,7 @@ level_type_enum_create = ("CREATE TYPE level_type AS ENUM ('free', 'paid')")
 songplay_table_create = ("""
                         CREATE TABLE IF NOT EXISTS songplays (
                                 songplay_id SERIAL PRIMARY KEY,
-                                start_time bigint NOT NULL,
+                                start_time timestamp,
                                 user_id varchar NOT NULL,
                                 level level_type,
                                 song_id varchar,
@@ -51,7 +51,7 @@ artist_table_create = ("""CREATE TABLE IF NOT EXISTS artists(
                             longitude numeric)""")
     
 time_table_create = ("""CREATE TABLE IF NOT EXISTS time(
-                            start_time SERIAL PRIMARY KEY,
+                            start_time timestamp,
                             hour int,
                             day int,
                             week int, 
@@ -75,8 +75,8 @@ artist_table_insert = ("""INSERT INTO artists(artist_id, name, location, latitud
                           VALUES(%s, %s, %s, %s, %s);""")
 
 
-time_table_insert = ("""INSERT INTO time(hour, day, week, month, year, weekday)
-                        VALUES( %s, %s, %s, %s, %s, %s);""")
+time_table_insert = ("""INSERT INTO time(start_time, hour, day, week, month, year, weekday)
+                        VALUES( %s, %s, %s, %s, %s, %s, %s);""")
 
 # FIND SONGS
 
