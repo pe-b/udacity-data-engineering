@@ -37,7 +37,6 @@ File example:\
   {"artist":null,"auth":"Logged In","firstName":"Walter","gender":"M","itemInSession":0,"lastName":"Frye","length":null,"level":"free","location":"San Francisco-Oakland-Hayward, CA","method":"GET","page":"Home","registration":1540919166796.0,"sessionId":38,"song":null,"status":200,"ts":1541105830796,"userAgent":"\"Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/36.0.1985.143 Safari\/537.36\"","userId":"39"}
   {"artist":null,"auth":"Logged In","firstName":"Kaylee","gender":"F","itemInSession":0,"lastName":"Summers","length":null,"level":"free","location":"Phoenix-Mesa-Scottsdale, AZ","method":"GET","page":"Home","registration":1540344794796.0,"sessionId":139,"song":null,"status":200,"ts":1541106106796,"userAgent":"\"Mozilla\/5.0 (Windows NT 6.1; WOW64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/35.0.1916.153 Safari\/537.36\"","userId":"8"}
 
-
 ## Solution
 ### Schema Design
 The database schema will be modelled following a star schema centered around the 'songplays' table. The star schema has been chosen as a best fit for the type of queries intended.  
@@ -93,7 +92,7 @@ month         `int`\
 year          `int`\
 weekday       `int`
 
-### ETL Pipeline - TODO
+### ETL Pipeline
 The etl pipeline is constructed in the steps detailed below:
 1. extract and process the song dataset
 2. extract and process the log dataset
