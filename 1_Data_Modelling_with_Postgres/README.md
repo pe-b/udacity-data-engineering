@@ -129,6 +129,11 @@ Run the project with the following:
 2. `python etl.py` - starts the ETL script.\
 The database should be ready to be queried now.
 
+### Resources
+1. Udacity lectures
+2. Postgresql documentation (https://www.postgresql.org/docs/)
+3. Pandas documentation (https://pandas.pydata.org/docs/reference/index.html)
+4. Stack overflow (https://stackoverflow.com/)
 
 ### Tech stack
 Jupyter Notebook\
@@ -138,3 +143,4 @@ Pandas\
 Postgres
 
 
+Find project repository at https://github.com/pe-b/udacity-data-engineering/tree/main/1_Data_Modelling_with_Postgres
