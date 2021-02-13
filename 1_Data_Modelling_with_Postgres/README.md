@@ -3,8 +3,7 @@
 This represents the first out of the eight projects in the "Data Engineering Nanodegree" provided by Udacity.
 
 ## Summary
-The project represents the development of an etl pipeline built to facilitate the analysis of data in a music streaming organisation.
-
+The project consists of the design of a new database and the implementation of an ETL pipeline with the purpose of facilitating business analysis on the collected data.
 
 ## Motivation - TODO
 Practice and apply to a real-world scenario the concepts covered in the 'Data Modelling with Postgres' chapter such as:\
@@ -39,11 +38,11 @@ File example:\
 
 ## Solution
 ### Schema Design
-With the project being at a conceptual stage, and the analytics team not having yet a defined set of queries to be performed on the data, it is thought that a relational database with a star schema will provide the most flexibiity for future queries.
+With the project being at a conceptual stage, and the analytics team not having yet a defined set of queries to be performed on the data, it is thought that a relational database with a star schema will provide the most flexibiity.
 
 Tables:
-1. songplays (fact table) - records log data associated with streaming actions for a song
-attributes:\
+1. songplays (fact table) - records log data associated with streaming actions for a song\
+Table attributes:\
 songplay_id   `int` - PK\
 start_time    `timestamp`\
 user_id       `varchar`\
@@ -55,8 +54,8 @@ location      `varchar`\
 user_agent    `varchar`
 
 2. users (dimension table) - contains the users in the app\
-on conflict do nothing - a single row per user provides all the necessary info\
-attributes:\
+On conflict do nothing - a single row per user provides all the necessary info\
+Tableattributes:\
 user_id       `varchar` - PK\
 first_name    `varchar`\
 last_name     `varchar`\
@@ -64,8 +63,8 @@ gender        `varchar`\
 level         `ENUM(free, paid)`
 
 3. songs (dimension table) - contains the songs in the music database\
-on conflict do nothing - a single row per song provides all the necessary info\
-attributes:\
+On conflict do nothing - a single row per song provides all the necessary info\
+Table attributes:\
 song_id       `varchar` - PK\
 title         `varchar`\
 artist_id     `varchar`\
@@ -73,8 +72,8 @@ year          `int`\
 duration      `numeric`
 
 4. artists (dimension table) - artists in the music database\
-on conflict do nothing - a single row per artist provides all the necessary info\
-attributes: \
+On conflict do nothing - a single row per artist provides all the necessary info\
+Table attributes: \
 artist_id     `varchar` - PK\
 name          `varchar`\
 location      `varchar`\
@@ -82,8 +81,8 @@ latitude      `numeric`\
 longitude     `numeric`
 
 5. time (dimension table) - timestamps of records in 'songplays' into specific units\
-on conflict do nothing - since the timestamp is very precise, we assume there shouldn't be multiple entries with the exact same timestamp\
-attributes:\
+On conflict do nothing - since the timestamp is very precise, we assume there shouldn't be multiple entries with the exact same timestamp\
+Table attributes:\
 start_time    `timestamp` - PK\
 hour          `int`\
 day           `int`\
@@ -93,14 +92,14 @@ year          `int`\
 weekday       `int`
 
 ### ETL Pipeline
-An ETL has been constructed to facilitate the transfer of data between the existing datasets and the new database.
-The ETL pipeline is constructed following the steps detailed below:
+An ETL has been constructed to facilitate the transfer of data between the existing datasets and the new database.\
+The ETL pipeline is constructed following the steps below:
 1. extract and process the song dataset
 2. extract and process the log dataset
 3. load the new tables with the processed data
 
 ### Queries Recommendations
-The following represents a recommended set of queries for the extraction of the loosely defined 'what users are listening to':\
+The following represents a set of example queries that can be performed on the data to identify the most listened to song and artist:
 1. artist listened to the most\
 
 SELECT artist_id 
@@ -112,7 +111,7 @@ HAVING COUNT(songplay_id)=
     FROM songplays 
     GROUP BY artist_id) t1)\
 
-2. song listened to the most\
+2. song listened to the most
 
 SELECT song_id 
 FROM songplays 
@@ -123,7 +122,7 @@ HAVING COUNT(songplay_id)=
     FROM songplays 
     GROUP BY song_id) t1)\
 
-### Tech Stack
+### Tech stack
 Jupyter Notebook\
 Python\
 Psycopg2\
