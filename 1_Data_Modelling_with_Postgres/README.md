@@ -126,7 +126,7 @@ HAVING COUNT(songplay_id)=
 Make sure you have installed the following: python3, postgresql, psycopg2.\
 Run the project with the following:
 1. `python create_tables.py` - cleans the databse if already ran before and creates the tables with the associated scripts
-2. `python etl.py` - starts the ETL script.
+2. `python etl.py` - starts the ETL script.\
 The database should be ready to be queried now.
 
 
