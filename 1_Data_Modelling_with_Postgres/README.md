@@ -39,7 +39,7 @@ File example:\
 
 ## Solution
 ### Schema Design
-The database schema will be modelled following a star schema centered around the 'songplays' table. The star schema has been chosen as a best fit for the type of queries intended.  
+With the project being at a conceptual stage, and the analytics team not having yet a defined set of queries to be performed on the data, it is thought that a relational database with a star schema will provide the most flexibiity for future queries.
 
 Tables:
 1. songplays (fact table) - records log data associated with streaming actions for a song
@@ -93,12 +93,37 @@ year          `int`\
 weekday       `int`
 
 ### ETL Pipeline
-The etl pipeline is constructed in the steps detailed below:
+An ETL has been constructed to facilitate the transfer of data between the existing datasets and the new database.
+The ETL pipeline is constructed following the steps detailed below:
 1. extract and process the song dataset
 2. extract and process the log dataset
 3. load the new tables with the processed data
 
-### Stack
+### Queries Recommendations
+The following represents a recommended set of queries for the extraction of the loosely defined 'what users are listening to':\
+1. artist listened to the most\
+
+SELECT artist_id 
+FROM songplays 
+GROUP BY artist_id 
+HAVING COUNT(songplay_id)=
+  (SELECT MAX(artistcount) FROM
+    (SELECT artist_id, COUNT(songplay_id) AS artistcount 
+    FROM songplays 
+    GROUP BY artist_id) t1)\
+
+2. song listened to the most\
+
+SELECT song_id 
+FROM songplays 
+GROUP BY song_id 
+HAVING COUNT(songplay_id)=
+  (SELECT MAX(songscount) FROM
+    (SELECT song_id, COUNT(songplay_id) AS songscount 
+    FROM songplays 
+    GROUP BY song_id) t1)\
+
+### Tech Stack
 Jupyter Notebook\
 Python\
 Psycopg2\
