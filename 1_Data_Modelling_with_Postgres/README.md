@@ -130,7 +130,7 @@ Run the project with the following:
 The database should be ready to be queried now.
 
 ### Resources
-1. Udacity lectures
+1. Udacity RDBMS & Postgresql lectures
 2. Postgresql documentation (https://www.postgresql.org/docs/)
 3. Pandas documentation (https://pandas.pydata.org/docs/reference/index.html)
 4. Stack overflow (https://stackoverflow.com/)
