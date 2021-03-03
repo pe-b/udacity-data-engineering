@@ -5,7 +5,7 @@ This represents the first out of the eight projects in the "Data Engineering Nan
 ## Summary
 The project consists of the design of a new database and the implementation of an ETL pipeline with the purpose of facilitating business analysis on the collected data.
 
-## Motivation - TODO
+## Motivation
 Practice and apply to a real-world scenario the concepts covered in the 'Data Modelling with Postgres' chapter such as:\
 -normalisation/ denormalisation\
 -query derivation\
@@ -18,7 +18,7 @@ Practice and apply to a real-world scenario the concepts covered in the 'Data Mo
 A music streaming organisation similar to Spotify has been collecting data on its user's actity while they were using the streaming application. The business analytics team intends to gain insight on the frequency with which songs are played.\
 The team requires the engineer to design and develop a database schema and an ETL pipeline optimised for the already collected data and the analysis mentioned above.
 
-### Existing Data - TODO
+### Existing Data
 The existing data consists of two datasets:\
 
 1. Song Dataset\
