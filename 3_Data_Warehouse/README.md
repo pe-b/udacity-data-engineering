@@ -135,14 +135,15 @@ The etl is implemented through the following files:
 
 ### Tech Stack
 Python\
-AWS
-- IAM
-- S3
-- Redshift\
 Boto3\
 Psycopg2\
 Jupyter\
-Pandas
+Pandas\
+AWS
+- IAM
+- S3
+- Redshift
+
 
 ### Resources
 1. Udacity Data Warehouse with AWS lectures
