@@ -143,4 +143,4 @@ Pandas\
 Postgres
 
 
-Find project repository at https://github.com/pe-b/udacity-data-engineering/tree/main/1_Data_Modelling_with_Postgres
+Find project repository at [Project link](https://github.com/pe-b/udacity-data-engineering/tree/main/1_Data_Modelling_with_Postgres).
