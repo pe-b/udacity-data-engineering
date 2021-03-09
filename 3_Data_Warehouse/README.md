@@ -134,7 +134,7 @@ The etl is implemented through the following files:
 6. Scripts for cleaning up the resources
 
 ### Tech Stack
-Python
+Python\
 AWS
 - IAM
 - S3
