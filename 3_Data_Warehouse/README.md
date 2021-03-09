@@ -40,7 +40,7 @@ File example:\
 
 ### Schema Design
 The new data is modelled using a star schema as follows:\
-#### Staging Tables
+#### STAGING TABLES
 **staging_events** - table used for staging events\
 artist `VARCHAR`,\
 auth `VARCHAR`,\
@@ -72,6 +72,8 @@ song_id `VARCHAR`,\
 title `VARCHAR`,\
 duration `FLOAT`,\
 year `INTEGER`
+
+#### FINAL TABLES
 #### Fact Table
 **songplays** - records in event data associated with song plays i.e. records with page NextSong\
 songplay_id `INTEGER` SORTKEY,\
@@ -136,35 +138,35 @@ Python
 AWS
 - IAM
 - S3
-- Redshift
-Boto3
-Psycopg2
-Jupyter
+- Redshift\
+Boto3\
+Psycopg2\
+Jupyter\
 Pandas
 
 ### Resources
 1. Udacity Data Warehouse with AWS lectures
-2. AWS Redshift Docs (https://docs.aws.amazon.com/redshift/?id=docs_gateway)
-3. AWS IAM Docs (https://docs.aws.amazon.com/iam/?id=docs_gateway)
-4. Boto3 Docs (https://boto3.amazonaws.com/v1/documentation/api/latest/index.html)
+2. [AWS Redshift Docs](https://docs.aws.amazon.com/redshift/?id=docs_gateway)
+3. [AWS IAM Docs](https://docs.aws.amazon.com/iam/?id=docs_gateway)
+4. [Boto3 Docs](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html)
 
 ## How to Run the Project
-1. Fill in the following in `dwh.cfg`\
-- your aws account details under [AWS] [KEY]/[SECRET]\
+1. Fill in the following in `dwh.cfg`
+- your aws account details under [AWS] [KEY]/[SECRET]
 - I provided a default configuration (cheapest at the time of writing) for 
 the redshift cluster but feel free to change it.
-2. Run `create_cluster.py`\
-- it may take a few minutes until the cluster becomes 'available'.\
-- run multiple times creat_cluster.py as once the cluster is avaialble, the script\
-  will return the cluster's endpoint and arn\
+2. Run `create_cluster.py`
+- it may take a few minutes until the cluster becomes 'available'.
+- run multiple times creat_cluster.py as once the cluster is avaialble, the script
+  will return the cluster's endpoint and arn
 - copy the endpoint to `dwh.cfg` under [CLUSTER]/[HOST] and the arn under
-[IAM_ROLE]/[ARN]\
-3. Run `create_tables.py`\
+[IAM_ROLE]/[ARN]
+3. Run `create_tables.py`
 - the tables will not be created before cluster is active.
-4. Run `etl.py`\
-- this will take a few minutes depending on what AWS configuratio you chose.\
+4. Run `etl.py`
+- this will take a few minutes depending on what AWS configuratio you chose.
 5. Once step 4 is complete, you have your data ready to be queried in Redshift.
-6. When done, run clean_up_resources.py to delete the cluster and the role created at step 1.\
+6. When done, run clean_up_resources.py to delete the cluster and the role created at step 1.
 - run this multiple times until you receive 'Cluster not found' to make sure you deleted it.
 
 Find project repository at [Project link](https://github.com/pe-b/udacity-data-engineering/tree/main/3_Data_Warehouse).
