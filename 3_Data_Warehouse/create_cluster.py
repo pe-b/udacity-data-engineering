@@ -54,6 +54,7 @@ def create_redshift_cluster(dwh_cluster_type, dwh_node_type, dwh_num_nodes,
     8. Role arn
     9. Redshift client
     """
+        
     try:
         response = redshift.create_cluster(        
             #Hardware
@@ -68,7 +69,9 @@ def create_redshift_cluster(dwh_cluster_type, dwh_node_type, dwh_num_nodes,
             MasterUserPassword=dwh_db_password,
 
             #Roles (for s3 access)
-            IamRoles=[roleArn])
+            IamRoles=[roleArn],
+        
+            PubliclyAccessible=True)
         
     except Exception as e:
         print(e)

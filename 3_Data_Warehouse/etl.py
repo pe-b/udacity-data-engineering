@@ -4,12 +4,26 @@ from sql_queries import copy_table_queries, insert_table_queries
 
 
 def load_staging_tables(cur, conn):
+    """
+    Loads staging tables by running
+    the queries in copy_table_queries.
+    Parameters:
+    1. Cursor inside the databse
+    2. Connection object to database
+    """
     for query in copy_table_queries:
         cur.execute(query)
         conn.commit()
 
 
 def insert_tables(cur, conn):
+    """
+    Loads final tables by running
+    the queries in insert_table_queries.
+    Parameters:
+    1. Cursor inside the databse
+    2. Connection object to database
+    """
     for query in insert_table_queries:
         cur.execute(query)
         conn.commit()

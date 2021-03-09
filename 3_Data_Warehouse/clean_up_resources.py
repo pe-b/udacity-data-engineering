@@ -9,7 +9,8 @@ def delete_cluster(redshift, dwh_cluster_identifier):
     1. redshift client
     2. cluster identifier
     """
-    redshift.delete_cluster( ClusterIdentifier=dwh_cluster_identifier,  SkipFinalClusterSnapshot=True)
+    redshift.delete_cluster( ClusterIdentifier=dwh_cluster_identifier,  
+                            SkipFinalClusterSnapshot=True)
 
 
 def detach_policy_and_delete_role(iam, dwh_iam_role_name):
