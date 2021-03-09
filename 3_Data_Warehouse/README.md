@@ -9,7 +9,7 @@ The project consists of the design and implementation of an etl pipeline between
 Practice and apply to a real-world scenario the concepts covered in the 'Data Warehouse' module such as:\
 - Dimensional modelling
 - ETL with AWS
-- Work with AWS IAM, S3 and Redshift
+- AWS IAM, S3 and Redshift
 - Infrastructure as code
 - Data warehouse design
 
@@ -40,7 +40,7 @@ File example:\
 
 ### Schema Design
 The new data is modelled using a star schema as follows:\
-#### Stagign Tables
+#### Staging Tables
 **staging_events** - table used for staging events\
 artist `VARCHAR`,\
 auth `VARCHAR`,\
@@ -59,7 +59,7 @@ song `VARCHAR`,\
 status `INTEGER`,\
 ts `TIMESTAMP`,\
 userAgent `VARCHAR`,\
-userId `INTEGER`\
+userId `INTEGER`
 
 **staging_songs** - table used for staging songs\
 num_songs `INTEGER`,\
@@ -72,39 +72,39 @@ song_id `VARCHAR`,\
 title `VARCHAR`,\
 duration `FLOAT`,\
 year `INTEGER`
-#### Fact Table\
+#### Fact Table
 **songplays** - records in event data associated with song plays i.e. records with page NextSong\
 songplay_id `INTEGER` SORTKEY,\
-start_time `TIMESTAMP`,\ 
-user_id `INTEGER`,\ 
-level `VARCHAR`,\ 
+start_time `TIMESTAMP`,\
+user_id `INTEGER`,\
+level `VARCHAR`,\
 song_id `VARCHAR` DISTKEY,\
-artist_id `VARCHAR`,\ 
-session_id `INTEGER`,\ 
-location `VARCHAR`,\ 
-user_agent `VARCHAR`\
+artist_id `VARCHAR`,\
+session_id `INTEGER`,\
+location `VARCHAR`,\
+user_agent `VARCHAR`
 
-#### Dimension Tables\
+#### Dimension Tables
 **users** - users in the app\
 user_id `INTEGER` SORTKEY,\
 first_name `VARCHAR`,\
 last_name `VARCHAR`,\
 gender `VARCHAR`,\
-level `VARCHAR`\
+level `VARCHAR`
 
 **songs** - songs in music database\
 song_id `VARCHAR` SORTKEY,\
 title `VARCHAR`,\
 artist_id `VARCHAR` DISTKEY,\
 year `INTEGER`,\
-duration `FLOAT`\
+duration `FLOAT`
 
 **artists** - artists in music database\
 artist_id `VARCHAR` SORTKEY,\
 name `VARCHAR`,\
 location `VARCHAR`,\
 lattitude `FLOAT`,\
-longitude `FLOAT`\
+longitude `FLOAT`
 
 **time** - timestamps of records in songplays broken down into specific units\
 start_time `TIMESTAMP` SORTKEY,\
@@ -122,8 +122,6 @@ The etl is implemented through the following files:
 4. `create_tables.py` - creates the staging and final tables\
 5. `etl.py` - loads the data into the new tables\
 6. `clean_up_resources.py` - deletes the cluster and the role
-
-### Query Recommendations
 
 ### Steps Taken towards Solution
 1. Modelled final tables with a star schema
@@ -169,4 +167,4 @@ the redshift cluster but feel free to change it.
 6. When done, run clean_up_resources.py to delete the cluster and the role created at step 1.\
 - run this multiple times until you receive 'Cluster not found' to make sure you deleted it.
 
-Find project repository at https://github.com/pe-b/udacity-data-engineering/tree/main/3_Data_Warehouse
+Find project repository at [Project link](https://github.com/pe-b/udacity-data-engineering/tree/main/3_Data_Warehouse).
